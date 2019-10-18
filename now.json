@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "CMS",
+  "build": {
+    "env": {
+      "apiKey": "@firebaseapikey",
+      "authDomain": "@firebaseauthdomain",
+      "databaseURL": "@firebasedatabaseurl",
+      "projectId": "@googleprojectid",
+      "storageBucket": "@googlestoragebucket",
+      "messagingSenderId": "@firebasemessagesenderid",
+      "appId": "@firebaseappid",
+      "measurementId": "@firebasemeasurementid"
+    }
+  }
+}

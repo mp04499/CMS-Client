@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cms
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: cms
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cms
+    spec:
+      containers:
+        - name: cms
+          imagePullPolicy: Never
+          image: cms
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: canister
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cms
+  namespace: dev
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: cms
