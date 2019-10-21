@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import useInput from '../components/hooks/useInput';
-import * as firebase from 'firebase/app';
+import firebase from '../firebase';
 import 'firebase/auth';
+import { UserContext } from '../components/contexts/UserContext';
 import '../css/Home.css';
 
-const Home = () => {
+const Home = ({ history }) => {
+  const { user } = useContext(UserContext);
   const [email, updateEmail] = useInput('');
   const [password, updatePassword] = useInput('');
 
@@ -12,10 +15,14 @@ const Home = () => {
     e.preventDefault();
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
+      history.push('/me');
     } catch (error) {
       console.log(error);
     }
   };
+
+  if (user) return <Redirect to="/me" />;
+
   return (
     <div className={'Home container'}>
       <div

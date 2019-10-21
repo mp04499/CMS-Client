@@ -40,11 +40,47 @@ const Header = () => {
               </div>
             </>
           ) : (
-            <div className="navbar-item">
-              <button className="button is-dark" onClick={signOut}>
-                Sign Out
-              </button>
-            </div>
+            <>
+              <div
+                className="field is-grouped is-grouped-multiline"
+                style={{ marginTop: '15px', marginRight: '20px' }}
+              >
+                <div className="control">
+                  <div className="tags has-addons">
+                    <span className="tag is-white">Followers: </span>
+                    <NavLink to="/me" className="tag is-info is-light">
+                      1
+                    </NavLink>
+                  </div>
+                </div>
+                <div className="control">
+                  <div className="tags has-addons">
+                    <span className="tag is-white">Following: </span>
+                    <NavLink to="/me" className="tag is-info is-light">
+                      1
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+              <div className="navbar-item has-dropdown is-hoverable">
+                <NavLink className={'navbar-link'} to={'/me'}>
+                  {user.displayName}
+                </NavLink>
+                <div className="navbar-dropdown">
+                  <NavLink to="/settings" className="navbar-item">
+                    Account Settings
+                  </NavLink>
+                </div>
+              </div>
+              <div className="navbar-item">
+                <button
+                  className="button is-primary is-light"
+                  onClick={signOut}
+                >
+                  Sign Out
+                </button>
+              </div>
+            </>
           )}
         </div>
       </div>

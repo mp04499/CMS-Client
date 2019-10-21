@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
-import 'bulma/css/bulma.css';
+import './css/styles.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, HashRouter, Router } from 'react-router-dom';
+import { BrowserRouter, Router } from 'react-router-dom';
 
 const history = createBrowserHistory();
 ReactDOM.render(

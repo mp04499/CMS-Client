@@ -7,9 +7,7 @@ import React, {
 } from 'react';
 import { UserContext } from './UserContext';
 import FeedReducer from '../reducers/FeedReducer';
-import { getPosts, listener, getPost } from '../../utils/Posts';
-import firebase from '../../firebase';
-import 'firebase/auth';
+import { getPosts } from '../../utils/Posts';
 
 export const FeedContext = createContext();
 export const DispatchContext = createContext();

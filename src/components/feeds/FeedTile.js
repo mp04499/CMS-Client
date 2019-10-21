@@ -23,10 +23,9 @@ const FeedTile = () => {
     }
   };
 
-  console.log('FeedTile Rendering');
   return (
-    <div>
-      <div className="tile is-parent Feed-Tile">
+    <>
+      <div className="tile is-parent Feed-Tile is-flex">
         <div className="tile is-child box">
           <div className="title">
             <nav role={'navigation'} className={'level'}>
@@ -115,7 +114,7 @@ const FeedTile = () => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
