@@ -26,3 +26,14 @@ export const getFollowing = async uid => {
 
   return following;
 };
+
+export const completeSignup = async (uid, displayName) => {
+  db.collection('users')
+    .doc(uid)
+    .set({ followers: [], following: [], displayName });
+
+  db.collection('users')
+    .doc(uid)
+    .collection('posts')
+    .add({ message: 'My first post!', timestamp: new Date() });
+};

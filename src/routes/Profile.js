@@ -1,13 +1,24 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ProfileBlock from '../components/profile/ProfileBlock';
 import Followers from '../components/profile/Followers';
+import { getFollowers } from '../utils/User';
 
 const Profile = ({ user }) => {
+  const { t } = useParams();
   const [tab, setTab] = useState('profile');
+  const [followers, setFollowers] = useState([]);
+
+  useEffect(() => {
+    getFollowers(user.uid).then(currentFollowers =>
+      setFollowers(currentFollowers)
+    );
+    if (t) setTab(t);
+  }, [t, user.uid]);
 
   const currentBlock = () => {
-    if (tab === 'followers') return <Followers />;
+    if (tab === 'followers') return <Followers followers={followers} />;
     else if (tab === 'following') return <ProfileBlock />;
     else return <ProfileBlock />;
   };

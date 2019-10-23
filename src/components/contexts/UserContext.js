@@ -9,7 +9,7 @@ export const UserProvider = props => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(currentUser => {
+    const authState = firebase.auth().onAuthStateChanged(currentUser => {
       if (currentUser) {
         setUser(currentUser);
         setLoading(false);
@@ -18,6 +18,10 @@ export const UserProvider = props => {
         setLoading(false);
       }
     });
+
+    return () => {
+      authState();
+    };
   }, []);
 
   return (

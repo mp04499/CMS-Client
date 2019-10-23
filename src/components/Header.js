@@ -67,7 +67,10 @@ const Header = ({ user }) => {
                 <div className="control">
                   <div className="tags has-addons">
                     <span className="tag is-white">Followers: </span>
-                    <NavLink to="/me" className="tag is-info is-light">
+                    <NavLink
+                      to="/profile/followers"
+                      className="tag is-info is-light"
+                    >
                       {followers.length}
                     </NavLink>
                   </div>

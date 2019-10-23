@@ -12,7 +12,12 @@ import Profile from '../routes/Profile';
 const App = () => {
   const { user, loading } = useContext(UserContext);
 
-  if (loading) return null;
+  if (loading)
+    return (
+      <progress className="progress is-small is-primary" max="100">
+        15%
+      </progress>
+    );
 
   return (
     <Switch>
@@ -23,7 +28,7 @@ const App = () => {
         <PrivateRoute path={'/me'} user={user}>
           <Me user={user} />
         </PrivateRoute>
-        <PrivateRoute path={'/profile'} user={user}>
+        <PrivateRoute path={['/profile/:t', '/profile']} user={user}>
           <Profile user={user} />
         </PrivateRoute>
       </Template>

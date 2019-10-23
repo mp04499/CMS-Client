@@ -3,6 +3,7 @@ import validator from 'validator';
 import firebase from '../firebase';
 import 'firebase/auth';
 import useInput from '../components/hooks/useInput';
+import { completeSignup } from '../utils/User';
 import '../css/Signup.css';
 
 const Signup = ({ history }) => {
@@ -21,6 +22,7 @@ const Signup = ({ history }) => {
           .auth()
           .createUserWithEmailAndPassword(email, password);
         createdUser.user.updateProfile({ displayName: username });
+        await completeSignup(createdUser.user.uid, username);
         history.push('/me');
       } catch (error) {
         console.log(error);
@@ -57,7 +59,11 @@ const Signup = ({ history }) => {
     <>
       {errors.length > 0
         ? errors.map((e, index) => (
-            <article className="message is-danger is-small" key={index}>
+            <article
+              className="message is-danger is-small"
+              key={index}
+              style={{ width: '300px', margin: '0px 470px 10px' }}
+            >
               <div className="message-header">
                 <p>Error</p>
                 <button
