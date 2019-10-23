@@ -1,13 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import React from 'react';
 import useInput from '../components/hooks/useInput';
 import firebase from '../firebase';
 import 'firebase/auth';
-import { UserContext } from '../components/contexts/UserContext';
 import '../css/Home.css';
 
 const Home = ({ history }) => {
-  const { user } = useContext(UserContext);
   const [email, updateEmail] = useInput('');
   const [password, updatePassword] = useInput('');
 

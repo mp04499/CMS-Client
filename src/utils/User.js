@@ -24,15 +24,3 @@ export const getFollowing = async uid => {
 
   return following;
 };
-
-export const getUser = () => {
-  return new Promise((resolve, reject) => {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        resolve(user);
-      } else {
-        reject(null);
-      }
-    });
-  });
-};
