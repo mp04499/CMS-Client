@@ -21,6 +21,7 @@ export const FeedProvider = props => {
 
     getPosts(user.uid).then(posts => dispatch({ type: 'SET', feed: posts }));
   }, [user]);
+
   return (
     <FeedContext.Provider value={feeds}>
       <DispatchContext.Provider value={dispatch}>

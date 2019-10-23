@@ -7,12 +7,15 @@ import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Router } from 'react-router-dom';
+import { UserProvider } from './components/contexts/UserContext';
 
 const history = createBrowserHistory();
 ReactDOM.render(
   <Router history={history}>
     <BrowserRouter>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </BrowserRouter>
   </Router>,
   document.getElementById('root')

@@ -1,16 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useContext, useState, memo } from 'react';
+import React, { useState, memo } from 'react';
 import FeedList from './FeedList';
 import useInput from '../hooks/useInput';
-import { UserContext } from '../contexts/UserContext';
 import { createPost } from '../../utils/Posts';
 import '../../css/Feed.css';
 
-const FeedTile = () => {
+const FeedTile = ({ user }) => {
   const [active, setActive] = useState(false);
   const [error, setError] = useState('');
   const [message, updateMessage, reset] = useInput('');
-  const { user } = useContext(UserContext);
 
   const post = () => {
     if (message.trim().length > 0) {
@@ -49,7 +47,7 @@ const FeedTile = () => {
               </div>
             </nav>
           </div>
-          <FeedList />
+          <FeedList user={user} />
         </div>
       </div>
       <div className={active ? 'modal is-active' : 'modal'}>

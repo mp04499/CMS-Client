@@ -1,15 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import firebase from '../firebase';
 import 'firebase/auth';
-import { UserContext } from './contexts/UserContext';
+import { getFollowers, getFollowing } from '../utils/User';
 
-const Header = () => {
-  const { user } = useContext(UserContext);
+const Header = ({ user }) => {
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
 
-  const signOut = e => {
+  const [displayName, setDisplayName] = useState('');
+
+  const signOut = () => {
     firebase.auth().signOut();
   };
+
+  useEffect(() => {
+    const setInfo = async () => {
+      if (!user) return;
+
+      const currentFollowers = await getFollowers(user.uid);
+      const currentFollowing = await getFollowing(user.uid);
+      setFollowers(currentFollowers);
+      setFollowing(currentFollowing);
+      setDisplayName(user.displayName);
+    };
+    setInfo();
+  }, [user]);
+
   return (
     <nav
       className="navbar is-primary is-fixed-top"
@@ -49,7 +66,7 @@ const Header = () => {
                   <div className="tags has-addons">
                     <span className="tag is-white">Followers: </span>
                     <NavLink to="/me" className="tag is-info is-light">
-                      1
+                      {followers.length}
                     </NavLink>
                   </div>
                 </div>
@@ -57,18 +74,18 @@ const Header = () => {
                   <div className="tags has-addons">
                     <span className="tag is-white">Following: </span>
                     <NavLink to="/me" className="tag is-info is-light">
-                      1
+                      {following.length}
                     </NavLink>
                   </div>
                 </div>
               </div>
               <div className="navbar-item has-dropdown is-hoverable">
                 <NavLink className={'navbar-link'} to={'/me'}>
-                  {user.displayName}
+                  {displayName}
                 </NavLink>
                 <div className="navbar-dropdown">
-                  <NavLink to="/settings" className="navbar-item">
-                    Account Settings
+                  <NavLink to="/profile" className="navbar-item">
+                    Profile
                   </NavLink>
                 </div>
               </div>

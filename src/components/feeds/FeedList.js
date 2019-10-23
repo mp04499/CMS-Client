@@ -2,15 +2,13 @@
 import React, { useContext, useEffect, memo } from 'react';
 import Feed from './Feed';
 import { FeedContext, DispatchContext } from '../contexts/FeedContext';
-import { UserContext } from '../contexts/UserContext';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { listener } from '../../utils/Posts';
 import '../../css/Feed.css';
 
-const FeedList = () => {
+const FeedList = ({ user }) => {
   const feed = useContext(FeedContext) || [];
   const dispatch = useContext(DispatchContext);
-  const { user } = useContext(UserContext);
 
   useEffect(() => {
     let snapShot;
@@ -37,7 +35,7 @@ const FeedList = () => {
 
     listen();
 
-    return function cleanup() {
+    return () => {
       if (snapShot) snapShot();
     };
   }, [user, feed]);
@@ -51,7 +49,12 @@ const FeedList = () => {
           classNames="Feed"
           mountOnEnter
         >
-          <Feed key={post.id} name="Mike" at="Mike" text={post.message} />
+          <Feed
+            key={post.id}
+            name={user.displayName}
+            at={user.displayName}
+            text={post.message}
+          />
         </CSSTransition>
       ))}
     </TransitionGroup>

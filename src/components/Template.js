@@ -1,26 +1,29 @@
 import Header from './Header';
 import Foot from './Foot';
-import { NotificationProvider } from "./contexts/NotificationContext";
-import { ArticleProvider } from "./contexts/ArticleContext";
-import { FeedProvider } from "./contexts/FeedContext";
-import { UserProvider } from "./contexts/UserContext";
+import { NotificationProvider } from './contexts/NotificationContext';
+import { ArticleProvider } from './contexts/ArticleContext';
+import { FeedProvider } from './contexts/FeedContext';
 import React from 'react';
 
-const Template = props => {
+const Template = ({ children, user, loading }) => {
   return (
-    <UserProvider>
-      <NotificationProvider>
-        <Header />
-        <div style={{ padding: '100px', marginBottom: "60px" }}>
-          <ArticleProvider>
-            <FeedProvider>
-              {props.children}
-            </FeedProvider>
-          </ArticleProvider>
-        </div>
-        <Foot />
-      </NotificationProvider>
-    </UserProvider>
+    <NotificationProvider>
+      <Header user={user} />
+      <div
+        style={{
+          padding: '100px',
+          marginBottom: '60px',
+          display: 'flex',
+          minHeight: '100vh',
+          flexDirection: 'column',
+        }}
+      >
+        <ArticleProvider>
+          <FeedProvider>{children}</FeedProvider>
+        </ArticleProvider>
+      </div>
+      <Foot />
+    </NotificationProvider>
   );
 };
 

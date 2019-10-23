@@ -1,22 +1,46 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+
+import { UserContext } from './contexts/UserContext';
 
 import Template from './Template';
 import Home from '../routes/Home';
 import Signup from '../routes/Signup';
 import Me from '../routes/Me';
+import Profile from '../routes/Profile';
 
 const App = () => {
+  const { user, loading } = useContext(UserContext);
+
+  if (loading) return null;
+
   return (
     <Switch>
-      <Template>
+      <Template user={user}>
         <Route path={'/home'} component={Home} />
         <Route exact path={'/'} component={Home} />
         <Route path={'/signup'} component={Signup} />
-        <Route path={'/me'} component={Me} />
+        <PrivateRoute path={'/me'} user={user}>
+          <Me user={user} />
+        </PrivateRoute>
+        <Route path={'/profile'} component={Profile} />
       </Template>
     </Switch>
   );
 };
 
+const PrivateRoute = ({ user, children, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        user ? (
+          children
+        ) : (
+          <Redirect to={{ pathname: '/', state: { from: location } }} />
+        )
+      }
+    />
+  );
+};
 export default App;
