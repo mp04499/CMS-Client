@@ -5,7 +5,7 @@ import 'firebase/auth';
 import useInput from '../components/hooks/useInput';
 import '../css/Signup.css';
 
-const Signup = () => {
+const Signup = ({ history }) => {
   const [email, updateEmail] = useInput('');
   const [password, updatePassword] = useInput('');
   const [confirmPassword, updateConfirmPassword] = useInput('');
@@ -21,6 +21,7 @@ const Signup = () => {
           .auth()
           .createUserWithEmailAndPassword(email, password);
         createdUser.user.updateProfile({ displayName: username });
+        history.push('/me');
       } catch (error) {
         console.log(error);
       }
@@ -44,7 +45,7 @@ const Signup = () => {
 
     updateErrors(currentErrors);
 
-    return errors.length > 0;
+    return !(errors.length > 0);
   };
 
   const removeError = i => {

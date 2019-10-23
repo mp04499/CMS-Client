@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ProfileBlock from '../components/profile/ProfileBlock';
 import Followers from '../components/profile/Followers';
 
-const Profile = () => {
+const Profile = ({ user }) => {
   const [tab, setTab] = useState('profile');
 
   const currentBlock = () => {

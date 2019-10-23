@@ -23,7 +23,9 @@ const App = () => {
         <PrivateRoute path={'/me'} user={user}>
           <Me user={user} />
         </PrivateRoute>
-        <Route path={'/profile'} component={Profile} />
+        <PrivateRoute path={'/profile'} user={user}>
+          <Profile user={user} />
+        </PrivateRoute>
       </Template>
     </Switch>
   );

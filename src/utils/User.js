@@ -9,6 +9,8 @@ export const getFollowers = async uid => {
     .doc(uid)
     .get();
 
+  if (!querySnapshot.data()) return [];
+
   const { followers } = querySnapshot.data();
 
   return followers;

@@ -5,7 +5,7 @@ import { ArticleProvider } from './contexts/ArticleContext';
 import { FeedProvider } from './contexts/FeedContext';
 import React from 'react';
 
-const Template = ({ children, user, loading }) => {
+const Template = ({ children, user }) => {
   return (
     <NotificationProvider>
       <Header user={user} />

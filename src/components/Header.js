@@ -38,9 +38,11 @@ const Header = ({ user }) => {
           <NavLink className={'navbar-item'} to={'/home'}>
             Home
           </NavLink>
-          <NavLink className={'navbar-item'} to={'/me'}>
-            Me
-          </NavLink>
+          {user ? (
+            <NavLink className={'navbar-item'} to={'/me'}>
+              Me
+            </NavLink>
+          ) : null}
         </div>
         <div className="navbar-end">
           {!user ? (
