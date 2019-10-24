@@ -12,20 +12,21 @@ import Profile from '../routes/Profile';
 const App = () => {
   const { user, loading } = useContext(UserContext);
 
-  if (loading)
+  if (loading) {
     return (
       <progress className="progress is-small is-primary" max="100">
         15%
       </progress>
     );
+  }
 
   return (
     <Switch>
       <Template user={user}>
-        <Route path={'/home'} component={Home} />
-        <Route exact path={'/'} component={Home} />
-        <Route path={'/signup'} component={Signup} />
-        <PrivateRoute path={'/me'} user={user}>
+        <Route path="/home" component={Home} />
+        <Route exact path="/" component={Home} />
+        <Route path="/signup" component={Signup} />
+        <PrivateRoute path="/me" user={user}>
           <Me user={user} />
         </PrivateRoute>
         <PrivateRoute path={['/profile/:t', '/profile']} user={user}>
@@ -36,18 +37,14 @@ const App = () => {
   );
 };
 
-const PrivateRoute = ({ user, children, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        user ? (
-          children
-        ) : (
-          <Redirect to={{ pathname: '/', state: { from: location } }} />
-        )
-      }
-    />
-  );
-};
+const PrivateRoute = ({ user, children, ...rest }) => (
+  <Route
+    {...rest}
+    render={({ location }) => (user ? (
+      children
+    ) : (
+      <Redirect to={{ pathname: '/', state: { from: location } }} />
+    ))}
+  />
+);
 export default App;

@@ -4,9 +4,9 @@ import { createBrowserHistory } from 'history';
 import './css/styles.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './index.css';
+import { BrowserRouter, Router } from 'react-router-dom';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, Router } from 'react-router-dom';
 import { UserProvider } from './components/contexts/UserContext';
 
 const history = createBrowserHistory();
@@ -18,7 +18,7 @@ ReactDOM.render(
       </UserProvider>
     </BrowserRouter>
   </Router>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

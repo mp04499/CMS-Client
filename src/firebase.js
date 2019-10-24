@@ -12,8 +12,7 @@ const prodConfig = {
   measurementId: process.env.measurementId,
 };
 
-const firebaseConfig =
-  process.env.NODE_ENV === 'PRODUCTION' ? prodConfig : config.firebaseConfig;
+const firebaseConfig = process.env.NODE_ENV === 'PRODUCTION' ? prodConfig : config.firebaseConfig;
 
 export default !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)

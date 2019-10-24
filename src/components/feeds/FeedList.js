@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, memo } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Feed from './Feed';
 import { FeedContext, DispatchContext } from '../contexts/FeedContext';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { listener } from '../../utils/Posts';
 import '../../css/Feed.css';
 
@@ -16,11 +16,11 @@ const FeedList = ({ user }) => {
     const listen = async () => {
       if (!user || feed.length < 1) return;
       const query = await listener(user.uid);
-      snapShot = query.onSnapshot(async doc => {
+      snapShot = query.onSnapshot(async (doc) => {
         const updatedFeed = [];
-        doc.forEach(post => updatedFeed.push({ ...post.data(), id: post.id }));
+        doc.forEach((post) => updatedFeed.push({ ...post.data(), id: post.id }));
 
-        const newPosts = updatedFeed.filter(post => {
+        const newPosts = updatedFeed.filter((post) => {
           for (const p in feed) {
             if (feed[p].id === post.id) return false;
           }
@@ -28,8 +28,7 @@ const FeedList = ({ user }) => {
           return true;
         });
 
-        if (newPosts.length > 0 && newPosts !== feed)
-          dispatch({ type: 'ADD', posts: newPosts });
+        if (newPosts.length > 0 && newPosts !== feed) dispatch({ type: 'ADD', posts: newPosts });
       });
     };
 
@@ -42,7 +41,7 @@ const FeedList = ({ user }) => {
 
   return (
     <TransitionGroup className="Feed">
-      {feed.map(post => (
+      {feed.map((post) => (
         <CSSTransition
           key={post.id}
           timeout={500}

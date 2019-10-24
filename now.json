@@ -12,5 +12,11 @@
       "appId": "@firebaseappid",
       "measurementId": "@firebasemeasurementid"
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/user/(.*)",
+      "dest": "https://user-service.mikep.io/$1"
+    }
+  ]
 }

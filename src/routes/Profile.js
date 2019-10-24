@@ -11,16 +11,14 @@ const Profile = ({ user }) => {
   const [followers, setFollowers] = useState([]);
 
   useEffect(() => {
-    getFollowers(user.uid).then(currentFollowers =>
-      setFollowers(currentFollowers)
-    );
+    getFollowers(user.uid, 'list').then((currentFollowers) => setFollowers(currentFollowers));
     if (t) setTab(t);
   }, [t, user.uid]);
 
   const currentBlock = () => {
     if (tab === 'followers') return <Followers followers={followers} />;
-    else if (tab === 'following') return <ProfileBlock />;
-    else return <ProfileBlock />;
+    if (tab === 'following') return <ProfileBlock user={user} />;
+    return <ProfileBlock />;
   };
 
   return (

@@ -10,12 +10,12 @@ const ArticleTile = () => {
   return (
     <div className="tile is-child is-vertical box Article">
       <div className="title">
-        <nav className={'level'}>
-          <div className={'level-left'}>
-            <div className={'level-item'}>News</div>
+        <nav className="level">
+          <div className="level-left">
+            <div className="level-item">News</div>
           </div>
-          <div className={'level-right'}>
-            <div className={'level-item'}>
+          <div className="level-right">
+            <div className="level-item">
               <a
                 className={
                   !showNews

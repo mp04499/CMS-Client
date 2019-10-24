@@ -1,20 +1,19 @@
-import React, {createContext, useReducer} from "react";
+import React, { createContext, useReducer } from 'react';
 import NotificationReducer from '../reducers/NotificationReducer';
 
 const defaultNotifications = [
   {
     id: 0,
-    text: "First Notification Here"
+    text: 'First Notification Here',
   },
   {
-    id: 1, text: "Second Notification Here"
+    id: 1, text: 'Second Notification Here',
   }];
 
 export const NotificationContext = createContext();
 export const DispatchContext = createContext();
 
-export const NotificationProvider = props => {
-
+export const NotificationProvider = (props) => {
   const [notifications, dispatch] = useReducer(NotificationReducer, defaultNotifications);
 
   return (
@@ -24,5 +23,4 @@ export const NotificationProvider = props => {
       </DispatchContext.Provider>
     </NotificationContext.Provider>
   );
-
 };

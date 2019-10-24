@@ -4,12 +4,12 @@ import 'firebase/auth';
 
 export const UserContext = createContext();
 
-export const UserProvider = props => {
+export const UserProvider = (props) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const authState = firebase.auth().onAuthStateChanged(currentUser => {
+    const authState = firebase.auth().onAuthStateChanged((currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         setLoading(false);

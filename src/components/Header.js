@@ -18,7 +18,7 @@ const Header = ({ user }) => {
     const setInfo = async () => {
       if (!user) return;
 
-      const currentFollowers = await getFollowers(user.uid);
+      const currentFollowers = await getFollowers(user.uid, 'count');
       const currentFollowing = await getFollowing(user.uid);
       setFollowers(currentFollowers);
       setFollowing(currentFollowing);
@@ -35,11 +35,11 @@ const Header = ({ user }) => {
     >
       <div className="navbar-menu">
         <div className="navbar-start">
-          <NavLink className={'navbar-item'} to={'/home'}>
+          <NavLink className="navbar-item" to="/home">
             Home
           </NavLink>
           {user ? (
-            <NavLink className={'navbar-item'} to={'/me'}>
+            <NavLink className="navbar-item" to="/me">
               Me
             </NavLink>
           ) : null}
@@ -47,13 +47,13 @@ const Header = ({ user }) => {
         <div className="navbar-end">
           {!user ? (
             <>
-              <NavLink to={'/home'}>
+              <NavLink to="/home">
                 <div className="navbar-item">
                   <button className="button is-white">Login</button>
                 </div>
               </NavLink>
               <div className="navbar-item">
-                <NavLink to={'/signup'}>
+                <NavLink to="/signup">
                   <button className="button is-dark">Sign Up</button>
                 </NavLink>
               </div>
@@ -71,7 +71,7 @@ const Header = ({ user }) => {
                       to="/profile/followers"
                       className="tag is-info is-light"
                     >
-                      {followers.length}
+                      {followers}
                     </NavLink>
                   </div>
                 </div>
@@ -85,7 +85,7 @@ const Header = ({ user }) => {
                 </div>
               </div>
               <div className="navbar-item has-dropdown is-hoverable">
-                <NavLink className={'navbar-link'} to={'/me'}>
+                <NavLink className="navbar-link" to="/me">
                   {displayName}
                 </NavLink>
                 <div className="navbar-dropdown">

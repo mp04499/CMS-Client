@@ -8,7 +8,7 @@ const Home = ({ history }) => {
   const [email, updateEmail] = useInput('');
   const [password, updatePassword] = useInput('');
 
-  const login = async e => {
+  const login = async (e) => {
     e.preventDefault();
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
@@ -20,7 +20,7 @@ const Home = ({ history }) => {
 
   return (
     <>
-      <div className={'Home container'}>
+      <div className="Home container">
         <div
           className="field"
           style={{ paddingTop: '70px', width: '300px', margin: '0 auto' }}

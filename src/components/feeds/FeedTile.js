@@ -26,15 +26,15 @@ const FeedTile = ({ user }) => {
       <div className="tile is-parent Feed-Tile is-flex">
         <div className="tile is-child box">
           <div className="title">
-            <nav role={'navigation'} className={'level'}>
-              <div className={'level-left'}>
-                <div className={'level-item'}>
-                  <h1 className={'title'}> My Feed </h1>
+            <nav role="navigation" className="level">
+              <div className="level-left">
+                <div className="level-item">
+                  <h1 className="title"> My Feed </h1>
                 </div>
               </div>
 
-              <div className={'level-right'}>
-                <div className={'level-item'}>
+              <div className="level-right">
+                <div className="level-item">
                   <a
                     onClick={() => setActive(true)}
                     className="button is-rounded is-primary"
@@ -68,16 +68,16 @@ const FeedTile = ({ user }) => {
           ) : (
             ''
           )}
-          <div className={'card'}>
-            <div className={'card-header'}>
-              <nav className={'level'}>
+          <div className="card">
+            <div className="card-header">
+              <nav className="level">
                 <div className="level-item has-text-centered">
-                  <h4 className={'title is-4'}>Post Message</h4>
+                  <h4 className="title is-4">Post Message</h4>
                 </div>
               </nav>
             </div>
-            <div className={'card-content'}>
-              <div className={'content'}>
+            <div className="card-content">
+              <div className="content">
                 <textarea
                   value={message}
                   onChange={updateMessage}
@@ -86,8 +86,8 @@ const FeedTile = ({ user }) => {
                 />
               </div>
             </div>
-            <footer className={'card-footer has-text-centered'}>
-              <div className={'content'}>
+            <footer className="card-footer has-text-centered">
+              <div className="content">
                 <a
                   className="button is-primary"
                   style={{

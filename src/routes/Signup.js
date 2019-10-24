@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import validator from 'validator';
-import firebase from '../firebase';
-import 'firebase/auth';
 import useInput from '../components/hooks/useInput';
 import { completeSignup } from '../utils/User';
 import '../css/Signup.css';
@@ -13,17 +11,13 @@ const Signup = ({ history }) => {
   const [username, updateUsername] = useInput('');
   const [errors, updateErrors] = useState([]);
 
-  const createUser = async e => {
+  const createUser = async (e) => {
     e.preventDefault();
 
     if (verifyFields()) {
       try {
-        const createdUser = await firebase
-          .auth()
-          .createUserWithEmailAndPassword(email, password);
-        createdUser.user.updateProfile({ displayName: username });
-        await completeSignup(createdUser.user.uid, username);
-        history.push('/me');
+        const status = await completeSignup(email, password, username);
+        if (status === 200) history.push('/');
       } catch (error) {
         console.log(error);
       }
@@ -36,21 +30,19 @@ const Signup = ({ history }) => {
     if (!validator.isEmail(email)) currentErrors.push('Invalid Email');
 
     if (
-      validator.isEmpty(password) ||
-      validator.isEmpty(confirmPassword) ||
-      validator.isEmpty(username)
-    )
-      currentErrors.push('Not all fields have been completed');
+      validator.isEmpty(password)
+      || validator.isEmpty(confirmPassword)
+      || validator.isEmpty(username)
+    ) currentErrors.push('Not all fields have been completed');
 
-    if (password !== confirmPassword)
-      currentErrors.push('Password and Confirm Password is not the same');
+    if (password !== confirmPassword) currentErrors.push('Password and Confirm Password is not the same');
 
     updateErrors(currentErrors);
 
     return !(errors.length > 0);
   };
 
-  const removeError = i => {
+  const removeError = (i) => {
     const newErrors = errors.filter((e, index) => index !== i);
     updateErrors(newErrors);
   };
@@ -59,24 +51,24 @@ const Signup = ({ history }) => {
     <>
       {errors.length > 0
         ? errors.map((e, index) => (
-            <article
-              className="message is-danger is-small"
-              key={index}
-              style={{ width: '300px', margin: '0px 470px 10px' }}
-            >
-              <div className="message-header">
-                <p>Error</p>
-                <button
-                  onClick={() => removeError(index)}
-                  className="delete"
-                  aria-label="delete"
-                ></button>
-              </div>
-              <div className="message-body">{e}</div>
-            </article>
-          ))
+          <article
+            className="message is-danger is-small"
+            key={index}
+            style={{ width: '300px', margin: '0px 470px 10px' }}
+          >
+            <div className="message-header">
+              <p>Error</p>
+              <button
+                onClick={() => removeError(index)}
+                className="delete"
+                aria-label="delete"
+              />
+            </div>
+            <div className="message-body">{e}</div>
+          </article>
+        ))
         : null}
-      <div className={'SignUp container'}>
+      <div className="SignUp container">
         <div
           className="field"
           style={{ paddingTop: '70px', width: '300px', margin: '0 auto' }}
