@@ -100,6 +100,6 @@ const ProfileBlock = ({ user, history }) => {
 
 ProfileBlock.propTypes = {
   user: PropTypes.objectOf(PropTypes.object).isRequired,
-
+  history: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 export default ProfileBlock;
