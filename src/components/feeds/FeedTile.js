@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, memo } from 'react';
+import PropType from 'prop-types';
 import FeedList from './FeedList';
 import useInput from '../hooks/useInput';
 import { createPost } from '../../utils/Posts';
@@ -35,14 +35,15 @@ const FeedTile = ({ user }) => {
 
               <div className="level-right">
                 <div className="level-item">
-                  <a
+                  <button
                     onClick={() => setActive(true)}
                     className="button is-rounded is-primary"
+                    type="button"
                   >
                     <span className="icon is-small">
                       <i className="fas fa-plus" style={{ color: '#fff' }} />
                     </span>
-                  </a>
+                  </button>
                 </div>
               </div>
             </nav>
@@ -61,6 +62,7 @@ const FeedTile = ({ user }) => {
                   onClick={() => setError('')}
                   className="delete is-small"
                   aria-label="delete"
+                  type="button"
                 />
               </div>
               <div className="message-body">{error}</div>
@@ -88,7 +90,7 @@ const FeedTile = ({ user }) => {
             </div>
             <footer className="card-footer has-text-centered">
               <div className="content">
-                <a
+                <button
                   className="button is-primary"
                   style={{
                     color: '#fff',
@@ -99,9 +101,10 @@ const FeedTile = ({ user }) => {
                   onClick={() => {
                     post();
                   }}
+                  type="button"
                 >
                   Post
-                </a>
+                </button>
               </div>
             </footer>
           </div>
@@ -109,6 +112,7 @@ const FeedTile = ({ user }) => {
             onClick={() => setActive(!active)}
             className="modal-close is-large"
             aria-label="close"
+            type="button"
           />
         </div>
       </div>
@@ -117,3 +121,8 @@ const FeedTile = ({ user }) => {
 };
 
 export default memo(FeedTile);
+
+FeedTile.propTypes = {
+  user: PropType.objectOf(PropType.object).isRequired,
+
+};

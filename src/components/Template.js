@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from './Header';
 import Foot from './Foot';
 import { NotificationProvider } from './contexts/NotificationContext';
@@ -26,3 +27,8 @@ const Template = ({ children, user }) => (
 );
 
 export default Template;
+
+Template.propTypes = {
+  children: PropTypes.node.isRequired,
+  user: PropTypes.objectOf(PropTypes.object).isRequired,
+};

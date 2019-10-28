@@ -1,34 +1,36 @@
 import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 export const ArticleContext = createContext();
 
-export const ArticleProvider = (props) => {
-  const [showNews, setShowNews] = useState(true);
+export const ArticleProvider = ({ children }) => {
+  const [showNews, setShowNews] = useState(false);
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=d5342e381e0748ada294675b8bca5fef')
-        .then((response) => setArticles(response.data.articles))
-        .catch((error) => console.log(error));
+    const fetchData = async () => {
+      const response = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=d5342e381e0748ada294675b8bca5fef');
+      setArticles(response.data.articles);
 
-      setShowNews(false);
-
-      if (showNews) setShowNews(!showNews);
-    }
+      if (articles.length > 0) { setShowNews(true); }
+    };
 
     setTimeout(() => {
       fetchData();
     }, 3000);
-  }, [showNews]);
+  }, [articles]);
 
   return (
     <ArticleContext.Provider value={{
       showNews, setShowNews, articles, setArticles,
     }}
     >
-      {props.children}
+      {children}
     </ArticleContext.Provider>
   );
+};
+
+ArticleProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

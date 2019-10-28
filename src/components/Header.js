@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import firebase from '../firebase';
 import 'firebase/auth';
 import { getFollowers, getFollowing } from '../utils/User';
@@ -19,7 +20,7 @@ const Header = ({ user }) => {
       if (!user) return;
 
       const currentFollowers = await getFollowers(user.uid, 'count');
-      const currentFollowing = await getFollowing(user.uid);
+      const currentFollowing = await getFollowing(user.uid, 'count');
       setFollowers(currentFollowers);
       setFollowing(currentFollowing);
       setDisplayName(user.displayName);
@@ -49,12 +50,12 @@ const Header = ({ user }) => {
             <>
               <NavLink to="/home">
                 <div className="navbar-item">
-                  <button className="button is-white">Login</button>
+                  <button className="button is-white" type="button">Login</button>
                 </div>
               </NavLink>
               <div className="navbar-item">
                 <NavLink to="/signup">
-                  <button className="button is-dark">Sign Up</button>
+                  <button className="button is-dark" type="button">Sign Up</button>
                 </NavLink>
               </div>
             </>
@@ -90,7 +91,7 @@ const Header = ({ user }) => {
                 </NavLink>
                 <div className="navbar-dropdown">
                   <NavLink to="/profile" className="navbar-item">
-                    Profile
+                      Profile
                   </NavLink>
                 </div>
               </div>
@@ -98,8 +99,9 @@ const Header = ({ user }) => {
                 <button
                   className="button is-primary is-light"
                   onClick={signOut}
+                  type="button"
                 >
-                  Sign Out
+                    Sign Out
                 </button>
               </div>
             </>
@@ -111,3 +113,7 @@ const Header = ({ user }) => {
 };
 
 export default Header;
+
+Header.propTypes = {
+  user: PropTypes.objectOf(PropTypes.object).isRequired,
+};

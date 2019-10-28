@@ -1,15 +1,37 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
+import { createCredentials, updateUser } from '../../utils/User';
 
-const ProfileBlock = ({ user }) => {
+const ProfileBlock = ({ user, history }) => {
   const [currentPassword, updateCurrentPassword] = useInput('');
   const [password, updatePassword] = useInput('');
   const [displayName, updateDisplayName] = useInput('');
   const [email, updateEmail] = useInput('');
+  const [errors, updateErrors] = useState([]);
 
   const updateProfile = async () => {
-    const authenticated = await user.reauthenticateWithCredential({ email: user.email, password });
+    const credentials = createCredentials(user.email, currentPassword);
+    try {
+      const authenticated = await user.reauthenticateWithCredential(credentials);
+      if (authenticated) {
+        const allUpdates = { password, displayName, email };
+        const values = Object.values(allUpdates).filter((value) => value !== '');
+        const updates = {};
+        values.forEach((value) => {
+          const entries = Object.entries(allUpdates).filter((e) => e[1] === value);
+          const key = entries[0][0];
+          updates[key] = value;
+        });
+
+        const status = await updateUser(user.uid, updates);
+
+        if (status === 200) history.push('/me');
+      }
+    } catch (error) {
+      updateErrors([...errors, error]);
+    }
   };
   return (
     <>
@@ -76,4 +98,8 @@ const ProfileBlock = ({ user }) => {
   );
 };
 
+ProfileBlock.propTypes = {
+  user: PropTypes.objectOf(PropTypes.object).isRequired,
+
+};
 export default ProfileBlock;

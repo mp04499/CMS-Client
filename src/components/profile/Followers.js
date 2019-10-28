@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Followers = ({ followers }) => (
   <>
@@ -11,8 +12,8 @@ const Followers = ({ followers }) => (
         </span>
       </p>
     </div>
-    {followers.map((follower, index) => (
-      <a className="panel-block" key={index}>
+    {followers.map((follower) => (
+      <a className="panel-block" key={follower.uid}>
         <span className="panel-icon">
           <i className="fas fa-user is-small" aria-hidden="true" />
         </span>
@@ -23,3 +24,7 @@ const Followers = ({ followers }) => (
 );
 
 export default Followers;
+
+Followers.propTypes = {
+  followers: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

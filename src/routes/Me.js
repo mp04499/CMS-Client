@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../css/Me.css';
 import ArticleTile from '../components/articles/ArticleTile';
 import FeedTile from '../components/feeds/FeedTile';
@@ -19,3 +20,7 @@ const Me = ({ user }) => (
 );
 
 export default Me;
+
+Me.propTypes = {
+  user: PropTypes.objectOf(PropTypes.object).isRequired,
+};

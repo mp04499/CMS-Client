@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import validator from 'validator';
+import PropTypes from 'prop-types';
 import useInput from '../components/hooks/useInput';
 import { completeSignup } from '../utils/User';
 import '../css/Signup.css';
@@ -10,19 +11,6 @@ const Signup = ({ history }) => {
   const [confirmPassword, updateConfirmPassword] = useInput('');
   const [username, updateUsername] = useInput('');
   const [errors, updateErrors] = useState([]);
-
-  const createUser = async (e) => {
-    e.preventDefault();
-
-    if (verifyFields()) {
-      try {
-        const status = await completeSignup(email, password, username);
-        if (status === 200) history.push('/');
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
 
   const verifyFields = () => {
     const currentErrors = [];
@@ -47,12 +35,26 @@ const Signup = ({ history }) => {
     updateErrors(newErrors);
   };
 
+  const createUser = async (e) => {
+    e.preventDefault();
+
+    if (verifyFields()) {
+      try {
+        const status = await completeSignup(email, password, username);
+        if (status === 200) history.push('/');
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <>
       {errors.length > 0
         ? errors.map((e, index) => (
           <article
             className="message is-danger is-small"
+            // eslint-disable-next-line react/no-array-index-key
             key={index}
             style={{ width: '300px', margin: '0px 470px 10px' }}
           >
@@ -62,6 +64,7 @@ const Signup = ({ history }) => {
                 onClick={() => removeError(index)}
                 className="delete"
                 aria-label="delete"
+                type="button"
               />
             </div>
             <div className="message-body">{e}</div>
@@ -146,7 +149,7 @@ const Signup = ({ history }) => {
             className="control"
             style={{ paddingTop: '30px', textAlign: 'center' }}
           >
-            <button className="button is-primary" onClick={createUser}>
+            <button className="button is-primary" onClick={createUser} type="button">
               Register
             </button>
           </p>
@@ -157,3 +160,7 @@ const Signup = ({ history }) => {
 };
 
 export default Signup;
+
+Signup.propTypes = {
+  history: PropTypes.objectOf(PropTypes.object).isRequired,
+};

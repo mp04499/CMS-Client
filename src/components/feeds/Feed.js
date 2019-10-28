@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 
 const Feed = ({ name, at, text }) => (
   <div className="box">
@@ -26,17 +26,17 @@ const Feed = ({ name, at, text }) => (
         </div>
         <nav className="level is-mobile">
           <div className="level-left">
-            <a className="level-item" aria-label="reply">
+            <a className="level-item" aria-label="reply" href="/me">
               <span className="icon is-small">
                 <i className="fas fa-reply" aria-hidden="true" />
               </span>
             </a>
-            <a className="level-item" aria-label="retweet">
+            <a className="level-item" aria-label="retweet" href="/me">
               <span className="icon is-small">
-                <i className="fas fa-retweet" aria-hidden="true" />
+                <i className="fas fa-retweet" aria-hidden="true" href="/me" />
               </span>
             </a>
-            <a className="level-item" aria-label="like">
+            <a className="level-item" aria-label="like" href="/me">
               <span className="icon is-small">
                 <i className="fas fa-heart" aria-hidden="true" />
               </span>
@@ -49,3 +49,9 @@ const Feed = ({ name, at, text }) => (
 );
 
 export default memo(Feed);
+
+Feed.propTypes = {
+  name: PropTypes.string.isRequired,
+  at: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};

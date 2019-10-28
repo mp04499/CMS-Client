@@ -1,8 +1,10 @@
 import axios from 'axios';
+import * as firebase from 'firebase';
+import 'firebase/auth';
 
 export const getFollowers = async (uid, type) => {
   try {
-    const response = await axios.get('/user/followers', {
+    const response = await axios.get('http://localhost:4000/followers', {
       params: { uid, type },
     });
 
@@ -10,13 +12,13 @@ export const getFollowers = async (uid, type) => {
 
     return followers;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 
 export const getFollowing = async (uid, type) => {
   try {
-    const response = await axios.get('/user/following', {
+    const response = await axios.get('http://localhost:4000/following', {
       params: { uid, type },
     });
 
@@ -40,3 +42,17 @@ export const completeSignup = async (email, password, displayName) => {
     return error;
   }
 };
+
+export const updateUser = async (uid, rest) => {
+  try {
+    const response = await axios.put('http://localhost:4000/update', { uid, ...rest });
+    return response.status;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const createCredentials = (email, password) => firebase
+  .auth
+  .EmailAuthProvider
+  .credential(email, password);

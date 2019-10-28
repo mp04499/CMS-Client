@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import useInput from '../components/hooks/useInput';
 import firebase from '../firebase';
 import 'firebase/auth';
@@ -63,7 +64,7 @@ const Home = ({ history }) => {
             className="control"
             style={{ paddingTop: '30px', textAlign: 'center' }}
           >
-            <button className="button is-primary" onClick={login}>
+            <button className="button is-primary" type="button" onClick={login}>
               Login
             </button>
           </p>
@@ -74,3 +75,7 @@ const Home = ({ history }) => {
 };
 
 export default Home;
+
+Home.propTypes = {
+  history: PropTypes.objectOf(PropTypes.object).isRequired,
+};

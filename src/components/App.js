@@ -1,4 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import { UserContext } from './contexts/UserContext';
@@ -47,4 +49,11 @@ const PrivateRoute = ({ user, children, ...rest }) => (
     ))}
   />
 );
+
 export default App;
+
+PrivateRoute.propTypes = {
+  user: PropTypes.objectOf(PropTypes.object, PropTypes.array).isRequired,
+  children: PropTypes.node.isRequired,
+  rest: PropTypes.string.isRequired,
+};

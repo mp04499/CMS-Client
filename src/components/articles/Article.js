@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 
 const Article = ({
   image, title, author, description, url, publishedAt,
@@ -16,7 +17,7 @@ const Article = ({
             <strong>{title}</strong>
             <br />
             <small>
-Author:
+                Author:
               {author}
             </small>
             <br />
@@ -30,3 +31,12 @@ Author:
 );
 
 export default memo(Article);
+
+Article.propTypes = {
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  publishedAt: PropTypes.string.isRequired,
+};

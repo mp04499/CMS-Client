@@ -16,21 +16,23 @@ const ArticleTile = () => {
           </div>
           <div className="level-right">
             <div className="level-item">
-              <a
+              <button
                 className={
-                  !showNews
+                  showNews
                     ? 'button is-primary is-outlined'
                     : 'button is-primary is-outlined is-loading'
                 }
                 onClick={() => setShowNews(!showNews)}
+                onKeyDown={() => setShowNews(!showNews)}
+                type="button"
               >
                 Refresh News
-              </a>
+              </button>
             </div>
           </div>
         </nav>
       </div>
-      {showNews === true ? (
+      {showNews === false ? (
         <progress className="progress is-primary" max="100">
           15%
         </progress>
