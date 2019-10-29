@@ -10,6 +10,7 @@ import Home from '../routes/Home';
 import Signup from '../routes/Signup';
 import Me from '../routes/Me';
 import Profile from '../routes/Profile';
+import Review from '../routes/Review';
 
 const App = () => {
   const { user, loading } = useContext(UserContext);
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/home" component={Home} />
         <Route exact path="/" component={Home} />
         <Route path="/signup" component={Signup} />
+        <Route path="/review" component={Review} />
         <PrivateRoute path="/me" user={user}>
           <Me user={user} />
         </PrivateRoute>

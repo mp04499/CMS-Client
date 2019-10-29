@@ -1,10 +1,11 @@
 import axios from 'axios';
 import * as firebase from 'firebase';
 import 'firebase/auth';
+import constants from './constants';
 
 export const getFollowers = async (uid, type) => {
   try {
-    const response = await axios.get('http://localhost:4000/followers', {
+    const response = await axios.get(constants.API.USER.FOLLOWERS, {
       params: { uid, type },
     });
 
@@ -18,7 +19,7 @@ export const getFollowers = async (uid, type) => {
 
 export const getFollowing = async (uid, type) => {
   try {
-    const response = await axios.get('http://localhost:4000/following', {
+    const response = await axios.get(constants.API.USER.FOLLOWING, {
       params: { uid, type },
     });
 
@@ -32,7 +33,7 @@ export const getFollowing = async (uid, type) => {
 
 export const completeSignup = async (email, password, displayName) => {
   try {
-    const response = await axios.post('/user/complete', {
+    const response = await axios.post(constants.API.USER.COMPLETE, {
       email,
       password,
       displayName,
@@ -45,7 +46,7 @@ export const completeSignup = async (email, password, displayName) => {
 
 export const updateUser = async (uid, rest) => {
   try {
-    const response = await axios.put('http://localhost:4000/update', { uid, ...rest });
+    const response = await axios.put(constants.API.USER.UPDATE, { uid, ...rest });
     return response.status;
   } catch (error) {
     return error;

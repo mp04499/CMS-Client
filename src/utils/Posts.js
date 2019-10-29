@@ -17,7 +17,7 @@ export const getPosts = async (uid) => {
 
     return posts;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 

@@ -6,8 +6,8 @@ import 'firebase/auth';
 import { getFollowers, getFollowing } from '../utils/User';
 
 const Header = ({ user }) => {
-  const [followers, setFollowers] = useState([]);
-  const [following, setFollowing] = useState([]);
+  const [followers, setFollowers] = useState(null);
+  const [following, setFollowing] = useState(null);
 
   const [displayName, setDisplayName] = useState('');
 
@@ -80,7 +80,7 @@ const Header = ({ user }) => {
                   <div className="tags has-addons">
                     <span className="tag is-white">Following: </span>
                     <NavLink to="/me" className="tag is-info is-light">
-                      {following.length}
+                      {following}
                     </NavLink>
                   </div>
                 </div>
