@@ -7,7 +7,7 @@ const ArticleList = () => {
 
   return articles
     .slice(0, 3)
-    .map(article => (
+    .map((article) => (
       <Article
         key={article.url}
         image={article.urlToImage}

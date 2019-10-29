@@ -10,7 +10,21 @@
       "storageBucket": "@googlestoragebucket",
       "messagingSenderId": "@firebasemessagesenderid",
       "appId": "@firebaseappid",
-      "measurementId": "@firebasemeasurementid"
+      "measurementId": "@firebasemeasurementid",
+      "REACT_APP_USER_FOLLOWERS": "/user/followers",
+      "REACT_APP_USER_FOLLOWING": "/user/following",
+      "REACT_APP_USER_COMPLETE": "/user/complete",
+      "REACT_APP_USER_UPDATE": "/user/update"
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/user/(.*)",
+      "dest": "https://user-service.mikep.io/$1"
+    },
+    {
+      "src": "/(.*)",
+      "headers": { "cache-control": "s-maxage=1, stale-while-revalidate"}
+    }
+  ]
 }

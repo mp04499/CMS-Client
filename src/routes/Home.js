@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import useInput from '../components/hooks/useInput';
 import firebase from '../firebase';
 import 'firebase/auth';
@@ -8,7 +9,7 @@ const Home = ({ history }) => {
   const [email, updateEmail] = useInput('');
   const [password, updatePassword] = useInput('');
 
-  const login = async e => {
+  const login = async (e) => {
     e.preventDefault();
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
@@ -20,7 +21,7 @@ const Home = ({ history }) => {
 
   return (
     <>
-      <div className={'Home container'}>
+      <div className="Home container">
         <div
           className="field"
           style={{ paddingTop: '70px', width: '300px', margin: '0 auto' }}
@@ -63,7 +64,7 @@ const Home = ({ history }) => {
             className="control"
             style={{ paddingTop: '30px', textAlign: 'center' }}
           >
-            <button className="button is-primary" onClick={login}>
+            <button className="button is-primary" type="button" onClick={login}>
               Login
             </button>
           </p>
@@ -74,3 +75,7 @@ const Home = ({ history }) => {
 };
 
 export default Home;
+
+Home.propTypes = {
+  history: PropTypes.objectOf(PropTypes.object).isRequired,
+};

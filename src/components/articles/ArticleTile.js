@@ -10,27 +10,29 @@ const ArticleTile = () => {
   return (
     <div className="tile is-child is-vertical box Article">
       <div className="title">
-        <nav className={'level'}>
-          <div className={'level-left'}>
-            <div className={'level-item'}>News</div>
+        <nav className="level">
+          <div className="level-left">
+            <div className="level-item">News</div>
           </div>
-          <div className={'level-right'}>
-            <div className={'level-item'}>
-              <a
+          <div className="level-right">
+            <div className="level-item">
+              <button
                 className={
-                  !showNews
+                  showNews
                     ? 'button is-primary is-outlined'
                     : 'button is-primary is-outlined is-loading'
                 }
                 onClick={() => setShowNews(!showNews)}
+                onKeyDown={() => setShowNews(!showNews)}
+                type="button"
               >
                 Refresh News
-              </a>
+              </button>
             </div>
           </div>
         </nav>
       </div>
-      {showNews === true ? (
+      {showNews === false ? (
         <progress className="progress is-primary" max="100">
           15%
         </progress>

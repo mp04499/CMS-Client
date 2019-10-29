@@ -4,7 +4,7 @@ const reducer = (state, action) => {
       return action.feed;
 
     case 'REMOVE':
-      return state.filter(f => f.id !== action.id);
+      return state.filter((f) => f.id !== action.id);
 
     case 'ADD':
       return [...action.posts, ...state];

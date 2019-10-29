@@ -1,39 +1,59 @@
-import firebase from '../firebase';
-import 'firebase/firestore';
+import axios from 'axios';
+import * as firebase from 'firebase';
+import 'firebase/auth';
+import constants from './constants';
 
-const db = firebase.firestore();
+export const getFollowers = async (uid, type) => {
+  try {
+    const response = await axios.get(constants.API.USER.FOLLOWERS, {
+      params: { uid, type },
+    });
 
-export const getFollowers = async uid => {
-  const querySnapshot = await db
-    .collection('users')
-    .doc(uid)
-    .get();
+    const { followers } = response.data;
 
-  if (!querySnapshot.data()) return [];
-
-  const { followers } = querySnapshot.data();
-
-  return followers;
+    return followers;
+  } catch (error) {
+    return error;
+  }
 };
 
-export const getFollowing = async uid => {
-  const querySnapshot = await db
-    .collection('users')
-    .doc(uid)
-    .get();
+export const getFollowing = async (uid, type) => {
+  try {
+    const response = await axios.get(constants.API.USER.FOLLOWING, {
+      params: { uid, type },
+    });
 
-  const { following } = querySnapshot.data();
+    const { following } = response.data;
 
-  return following;
+    return following;
+  } catch (error) {
+    return error;
+  }
 };
 
-export const completeSignup = async (uid, displayName) => {
-  db.collection('users')
-    .doc(uid)
-    .set({ followers: [], following: [], displayName });
-
-  db.collection('users')
-    .doc(uid)
-    .collection('posts')
-    .add({ message: 'My first post!', timestamp: new Date() });
+export const completeSignup = async (email, password, displayName) => {
+  try {
+    const response = await axios.post(constants.API.USER.COMPLETE, {
+      email,
+      password,
+      displayName,
+    });
+    return response.status;
+  } catch (error) {
+    return error;
+  }
 };
+
+export const updateUser = async (uid, rest) => {
+  try {
+    const response = await axios.put(constants.API.USER.UPDATE, { uid, ...rest });
+    return response.status;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const createCredentials = (email, password) => firebase
+  .auth
+  .EmailAuthProvider
+  .credential(email, password);

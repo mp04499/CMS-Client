@@ -3,7 +3,7 @@ import 'firebase/firestore';
 
 const db = firebase.firestore();
 
-export const getPosts = async uid => {
+export const getPosts = async (uid) => {
   try {
     const querySnapshot = await db
       .collection('users')
@@ -13,15 +13,15 @@ export const getPosts = async uid => {
       .get();
 
     const posts = [];
-    querySnapshot.forEach(post => posts.push({ ...post.data(), id: post.id }));
+    querySnapshot.forEach((post) => posts.push({ ...post.data(), id: post.id }));
 
     return posts;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 
-export const getPost = async id => {
+export const getPost = async (id) => {
   const postQuery = await db
     .collection('posts')
     .doc(id)
@@ -40,9 +40,7 @@ export const createPost = async (uid, message) => {
   }
 };
 
-export const listener = async uid => {
-  return db
-    .collection('users')
-    .doc(uid)
-    .collection('posts');
-};
+export const listener = async (uid) => db
+  .collection('users')
+  .doc(uid)
+  .collection('posts');
