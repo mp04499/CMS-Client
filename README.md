@@ -1,4 +1,4 @@
-### CMS Client
+# CMS Client
 
 ## Technologies
 * React with Typescript
