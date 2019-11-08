@@ -6,7 +6,7 @@ import 'firebase/auth';
 const { createContext, useState, useEffect } = React;
 export const UserContext = createContext({} as UserProviderInterface);
 
-export const UserProvider: React.FC<{ children: React.ReactChildren }> = ({
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children
 }) => {
   const [user, setUser] = useState<firebase.User | null>(null);

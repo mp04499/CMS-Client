@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { NotificationInterface } from 'interface';
-import { DispatchContext } from '../contexts/NotificationContext';
 import '../../css/Me.css';
 
-const { memo, useContext } = React;
-const Notification: React.FC<NotificationInterface> = ({ id, text }) => {
-  const dispatch = useContext(DispatchContext);
-
+const { memo } = React;
+const Notification: React.FC<NotificationInterface> = ({
+  id,
+  text,
+  dispatch
+}) => {
+  const handleClick = (): void => {
+    dispatch({ type: 'REMOVE', id });
+  };
   return (
     <div key={id} className="notification" style={{ height: '70px' }}>
       <button
@@ -15,7 +19,7 @@ const Notification: React.FC<NotificationInterface> = ({ id, text }) => {
         className="delete"
         key={id}
         id={id}
-        onClick={(): void => dispatch({ type: 'REMOVE', id })}
+        onClick={handleClick}
       />
       {text}
     </div>

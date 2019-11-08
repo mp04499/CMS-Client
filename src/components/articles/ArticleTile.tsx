@@ -8,6 +8,10 @@ const ArticleTile: React.FC<{}> = () => {
   const { useContext } = React;
   const { articles, showNews, setShowNews } = useContext(ArticleContext);
 
+  const loadNews = (): void => {
+    setShowNews(false);
+  };
+
   return (
     <div className="tile is-child is-vertical box Article">
       <div className="title">
@@ -23,9 +27,10 @@ const ArticleTile: React.FC<{}> = () => {
                     ? 'button is-primary is-outlined'
                     : 'button is-primary is-outlined is-loading'
                 }
-                onClick={(): void => setShowNews(!showNews)}
-                onKeyDown={(): void => setShowNews(!showNews)}
+                onClick={loadNews}
+                onKeyDown={loadNews}
                 type="button"
+                style={{ outline: 'none' }}
               >
                 Refresh News
               </button>

@@ -23,10 +23,10 @@ export const ArticleProvider: React.FC<{ children: React.ReactNode }> = ({
       }
     };
 
-    setTimeout(() => {
+    if (!showNews) {
       fetchData();
-    }, 3000);
-  }, [articles]);
+    }
+  }, [articles, showNews]);
 
   return (
     <ArticleContext.Provider

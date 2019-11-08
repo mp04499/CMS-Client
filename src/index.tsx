@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import './css/styles.css';
 import '@fortawesome/fontawesome-free/css/all.css';
-import './index.css';
 import { BrowserRouter, Router } from 'react-router-dom';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';

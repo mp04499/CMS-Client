@@ -21,14 +21,6 @@ export const getPosts = async uid => {
   }
 };
 
-export const getPost = async id => {
-  const postQuery = await db
-    .collection('posts')
-    .doc(id)
-    .get();
-  return postQuery.data();
-};
-
 export const createPost = async (uid, message) => {
   try {
     db.collection('users')

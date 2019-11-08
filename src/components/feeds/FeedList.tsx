@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FeedListInterface, Post } from 'interface';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Feed from './Feed';
-import { FeedContext, DispatchContext } from '../contexts/FeedContext';
+import { DispatchContext } from '../contexts/FeedContext';
 import { listener } from '../../utils/Posts';
 import '../../css/Feed.css';
 

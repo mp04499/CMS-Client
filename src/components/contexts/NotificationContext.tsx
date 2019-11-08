@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NotificationInterface } from 'interface';
+import { Notification } from 'interface';
 import NotificationReducer from '../reducers/NotificationReducer';
 
 const defaultNotifications = [
@@ -14,7 +14,7 @@ const defaultNotifications = [
 ];
 
 const { createContext, useReducer } = React;
-export const NotificationContext = createContext<NotificationInterface[]>([]);
+export const NotificationContext = createContext<Notification[]>([]);
 export const DispatchContext = createContext({} as React.Dispatch<any>);
 
 export const NotificationProvider: React.FC<{

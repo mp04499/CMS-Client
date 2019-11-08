@@ -29,7 +29,7 @@
     },
     {
       "src": "/(.*)",
-      "headers": { "cache-control": "s-maxage=1, stale-while-revalidate"}
+      "headers": { "cache-control": "max-age=31557600" }
     }
   ]
 }

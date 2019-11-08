@@ -20,8 +20,8 @@ const Home: React.FC<HomeInterface> = ({ history }) => {
   };
 
   return (
-    <>
-      <div className="Home container">
+    <div className="container is-fullhd">
+      <div className="Home">
         <div
           className="field"
           style={{ paddingTop: '70px', width: '300px', margin: '0 auto' }}
@@ -70,7 +70,7 @@ const Home: React.FC<HomeInterface> = ({ history }) => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
