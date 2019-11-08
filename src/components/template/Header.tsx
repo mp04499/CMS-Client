@@ -2,9 +2,9 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Follower } from 'interface';
 import * as fb from 'firebase/app';
-import firebase from '../firebase';
+import firebase from '../../firebase';
 import 'firebase/auth';
-import { getFollowersCount, getFollowing } from '../utils/User';
+import { getFollowersCount, getFollowing } from '../../utils/User';
 
 const { useEffect, useState, memo } = React;
 

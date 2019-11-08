@@ -5,7 +5,7 @@ import useInput from '../hooks/useInput';
 import { createPost } from '../../utils/Posts';
 import '../../css/Feed.css';
 
-const { useState, useContext, memo } = React;
+const { useState, memo } = React;
 
 const FeedTile: React.FC<FeedTileInterface> = ({ user, feed }) => {
   const [active, setActive] = useState(false);
@@ -16,6 +16,14 @@ const FeedTile: React.FC<FeedTileInterface> = ({ user, feed }) => {
     () => void
   ] = useInput('');
 
+  const handleClick = (): void => {
+    setActive(!active);
+  };
+
+  const clearError = (): void => {
+    setError('');
+  };
+
   const post = (): void => {
     if (message) {
       if (message.trim().length > 0) {
@@ -23,11 +31,11 @@ const FeedTile: React.FC<FeedTileInterface> = ({ user, feed }) => {
           createPost(user.uid, message);
           setActive(!active);
           reset();
-          setError('');
-        } else {
-          setError('Your message is empty!');
+          clearError();
         }
       }
+    } else {
+      setError('Your message is empty!');
     }
   };
 
@@ -46,7 +54,7 @@ const FeedTile: React.FC<FeedTileInterface> = ({ user, feed }) => {
               <div className="level-right">
                 <div className="level-item">
                   <button
-                    onClick={(): void => setActive(true)}
+                    onClick={handleClick}
                     className="button is-rounded is-primary"
                     type="button"
                   >
@@ -69,7 +77,7 @@ const FeedTile: React.FC<FeedTileInterface> = ({ user, feed }) => {
               <div className="message-header">
                 <p>Empty Post!</p>
                 <button
-                  onClick={(): void => setError('')}
+                  onClick={clearError}
                   className="delete is-small"
                   aria-label="delete"
                   type="button"
@@ -108,9 +116,7 @@ const FeedTile: React.FC<FeedTileInterface> = ({ user, feed }) => {
                     marginTop: '10px',
                     marginBottom: '10px'
                   }}
-                  onClick={(): void => {
-                    post();
-                  }}
+                  onClick={post}
                   type="button"
                 >
                   Post
@@ -119,7 +125,7 @@ const FeedTile: React.FC<FeedTileInterface> = ({ user, feed }) => {
             </footer>
           </div>
           <button
-            onClick={(): void => setActive(!active)}
+            onClick={handleClick}
             className="modal-close is-large"
             aria-label="close"
             type="button"

@@ -19,6 +19,7 @@ module.exports = {
     'react/jsx-curly-newline': 'off',
     'react/prop-types': 'off',
     'react/jsx-indent':  'off',
+    'react/jsx-wrap-multilines': 'off',
      // turn on errors for missing imports
      "import/no-unresolved": 0
     },

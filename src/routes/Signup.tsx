@@ -52,7 +52,7 @@ const Signup: React.FC<SignUpInterface> = ({ history }) => {
   };
 
   return (
-    <>
+    <div className="container is-fullhd">
       {errors.length > 0
         ? errors.map((e, index) => (
             <article
@@ -74,7 +74,7 @@ const Signup: React.FC<SignUpInterface> = ({ history }) => {
             </article>
           ))
         : null}
-      <div className="SignUp container">
+      <div className="SignUp">
         <div
           className="field"
           style={{ paddingTop: '70px', width: '300px', margin: '0 auto' }}
@@ -162,7 +162,7 @@ const Signup: React.FC<SignUpInterface> = ({ history }) => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

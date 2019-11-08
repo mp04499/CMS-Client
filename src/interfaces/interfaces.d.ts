@@ -83,6 +83,15 @@ declare module 'interface' {
   interface NotificationInterface {
     id: string;
     text?: string;
+    dispatch: React.Dispatch<any>;
+  }
+  interface Notification {
+    id: string;
+    text?: string;
+  }
+  interface NotificationListInterface {
+    notifications: Notification[];
+    dispatch: React.Dispatch<any>;
   }
   interface Article {
     url: string;

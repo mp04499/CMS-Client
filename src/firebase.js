@@ -13,7 +13,7 @@ const prodConfig = {
 };
 
 const firebaseConfig =
-  process.env.NODE_ENV === 'production' ? prodConfig : config.firebaseConfig;
+  process.env.NODE_ENV === 'PRODUCTION' ? prodConfig : config.firebaseConfig;
 
 export default !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)

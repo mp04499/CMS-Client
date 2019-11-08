@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { NotificationContext } from '../contexts/NotificationContext';
+import { NotificationListInterface } from 'interface';
 import Notification from './Notification';
 import '../../css/Notification.css';
 
-const NotificationList: React.FC<{}> = () => {
-  const { useContext } = React;
-  const notifications = useContext(NotificationContext);
-
+const NotificationList: React.FC<NotificationListInterface> = ({
+  notifications,
+  dispatch
+}) => {
   return (
     <TransitionGroup>
       {notifications.map(n => (
@@ -18,7 +18,12 @@ const NotificationList: React.FC<{}> = () => {
           mountOnEnter
           unmountOnExit
         >
-          <Notification key={n.id} id={n.id} text={n.text} />
+          <Notification
+            dispatch={dispatch}
+            key={n.id}
+            id={n.id}
+            text={n.text}
+          />
         </CSSTransition>
       ))}
     </TransitionGroup>
